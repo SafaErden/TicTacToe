@@ -27,11 +27,6 @@
 ## 🧐 About <a name = "about"></a>
 <h3 align="center"> In this project, the student builds a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.</h3>
 
-<p align="center">
-  <a href="" rel="noopener">
-  <img src="./img/screenshot.gif" alt="Project Screenshot"></a>
-</p>
-
 ---
 
 ## 🔧 Built with<a name = "built_using"></a>
