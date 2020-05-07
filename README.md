@@ -43,7 +43,7 @@
 ```
 
 ## Milestones:
-  ✔️ Milestone 01: Make your main.rb file displaying “Hello world!” when you use bin/main.rb as a bash command. 
+  ✔️ Milestone 01: Make your main.rb file displaying “Hello world!” when you use main as a bash command. 
 ## ✒️  Autors <a name = "author"></a>
 
 👤 **Kevin Alves**
