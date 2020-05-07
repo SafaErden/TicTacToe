@@ -38,7 +38,7 @@
 ```
 - Clone or download this repository;
 - Unpack (if downloaded);
-- Execute bubblesort.rb;
+- Execute main;
 
 ```
 
