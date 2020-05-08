@@ -1,2 +1,35 @@
 #!/usr/bin/env ruby
-puts 'Hello!'
+#Variables:
+player_1_name = ''
+player_2_name = ''
+player_1_choice
+game_off = false
+grid = [[1,2,3], [4,5,6], [7,8,9]]
+
+#UserInterface
+puts '------------------'
+puts 'TicTacToe'
+puts '------------------'
+puts 'Player 01, whats your name?'
+player_1_name = gets.chomp
+puts 'Player 02, whats your name?'
+player_2_name = gets.chomp
+puts "Welcome #{player_1_name} and #{player_2_name}! Now #{player_1_name}, you should choose X or O"
+player_1_choice = gets.chomp
+puts 'Validate'
+puts 'if valid, move on, else player should chose it again'
+p grid[0]
+p grid[1]
+p grid[2]
+puts "Ok, we\'re good to go! #{player_1_name} which area do you chose?"
+puts 'Validate'
+puts 'if valid, move on, else player should chose it again'
+puts "Now #{player_2_name}, please select an area"
+puts 'Validate'
+puts 'if valid, move on, else player should chose it again'
+#update grid
+puts 'Check if there\'s a winner, else -> draw'
+puts 'repeat it until game_off'
+puts 'If !draw, congrats player who won, else print: Draw! // then ask: Do you guys want to play again?'
+puts 'Validate'
+puts 'if valid, move on, else player should chose it again'
