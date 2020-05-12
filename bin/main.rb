@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # rubocop:disable Lint/UselessAssignment
 require "./lib/player.rb"
+require "./lib/validate.rb"
 # Variables:
 player_1_name = ''
 player_2_name = ''
@@ -9,29 +10,50 @@ player_2_choice = ''
 game_on = true
 grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
-
-p Player.count_players
+Player.count_players
 
 # UserInterface
 puts '------------------'
 puts 'TicTacToe'
 puts '------------------'
 
-puts 'Player1: What is your name?'
-player_1_name = gets.chomp
-get_name(player_1_name)
-puts "OK #{player_1_name}, whats your choice? 'X' or 'O'"
-player_1_choice=gets.chomp
-get_choice(player_1_name, player_1_choice)
-create_player(player_1_name, player_1_choice)
 
-puts 'Player 02, whats your name?'
-player_2_name = gets.chomp
-get_name(player_2_name)
-create_player(player_2_name, player_2_choice)
-# display grid function goes here, it will print out the grid each time the players make a valid choice.
-puts "Ok, we\'re good to go!"
-check_start
+choices=[]
+while Player.count_players<=1
+
+  valid_name=false 
+  while valid_name==false
+    puts "Player #{Player.count_players+1}, what is your name?"
+    name = gets.chomp
+    if valid_name?(name) == false
+      puts "Player #{Player.count_players+1}, please type a valid name!"
+    else
+      valid_name=true
+    end
+  end
+
+    if Player.count_players==0
+      valid_choice=false 
+      while valid_choice==false
+        puts "OK #{name}, whats your choice? 'X' or 'O'"
+        choice = gets.chomp
+        if valid_choice?(choice) == false
+          puts "Please type a valid choice!"
+        else
+          valid_choice=true
+          choices[0]=choice 
+        end
+      end
+    elsif Player.count_players==1
+      choices[0].downcase=="x" ? choices[1]="o" : choices[1]="x"
+      puts "OK #{name}, since #{Player1.name} has chosen '#{Player1.choice.upcase}' your choice will be '#{choices[1].upcase}' automatically."
+    end
+    Player.count_players==0 ? Player1=Player.new(name, choices[Player.count_players]) : Player2=Player.new(name, choices[Player.count_players])
+  end
+  puts "Ok, we\'re good to go!"
+
+
+
 # while game_on
 puts "#{player_1_name}, its your turn, which area do you chose?"
 player_1_choice = gets.chomp

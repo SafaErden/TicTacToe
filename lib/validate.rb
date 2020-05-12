@@ -1,5 +1,5 @@
-def validate_name?(name)
-  if name!=nil
+def valid_name?(name)
+  if name!=""
     return true
   else
     return false
@@ -7,22 +7,12 @@ def validate_name?(name)
 end
 
 choices=[]
-def validate_choice(choice)
+def valid_choice?(choice) 
   if choice.downcase=="x" || choice.downcase=="o"
     return true
   else
     return false
   end  
-end
-
-def get_name(name)
-  name = name
-  !validate_name?(name) ? get_name : get_choice(name)
-end
-
-def get_choice(name, _choice)
-  !validate_choice?(choice) ? get_choice(name) : create_player(name, choice)
-
 end
 
 def create_player(name,choice)
