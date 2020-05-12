@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # rubocop:disable Lint/UselessAssignment
-
+require "./lib/player.rb"
 # Variables:
 player_1_name = ''
 player_2_name = ''
@@ -9,12 +9,17 @@ player_2_choice = ''
 game_on = true
 grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
+
+p Player.count_players
+
 # UserInterface
 puts '------------------'
 puts 'TicTacToe'
 puts '------------------'
 puts 'Player 01, whats your name?'
 player_1_name = gets.chomp
+player_1_choice=gets.chomp
+
 puts 'Player 02, whats your name?'
 player_2_name = gets.chomp
 puts "Welcome #{player_1_name} and #{player_2_name}! Now #{player_1_name}, you should choose X or O"
