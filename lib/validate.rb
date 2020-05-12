@@ -15,20 +15,18 @@ def validate_choice(choice)
   end  
 end
 
-def get_name
-  puts 'Whats your name?'
-  name = gets.chomp
+def get_name(name)
+  name = name
   !validate_name?(name) ? get_name : get_choice(name)
 end
 
-def get_choice(name)
-  puts "OK #{name}, whats your choice? 'X' or 'O'"
-  choice = gets.chomp
-  !validate_choice?(name) ? get_choice(name) : create_player(name, choice)
+def get_choice(name, _choice)
+  !validate_choice?(choice) ? get_choice(name) : create_player(name, choice)
+
 end
 
 def create_player(name,choice)
-  player_one=Player.new(player_1_name, player_1_choice)
+  player_one=Player.new(name, choice)
   check_start
 end
 
