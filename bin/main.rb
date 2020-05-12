@@ -16,8 +16,7 @@ p Player.count_players
 puts '------------------'
 puts 'TicTacToe'
 puts '------------------'
-puts 'Player 01, whats your name?'
-player_1_name = gets.chomp
+
 player_1_choice=gets.chomp
 
 puts 'Player 02, whats your name?'
