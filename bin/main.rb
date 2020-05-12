@@ -2,10 +2,13 @@
 # rubocop:disable Lint/UselessAssignment
 require "./lib/player.rb"
 require "./lib/validate.rb"
+require "./lib/trackmoves.rb"
 # Variables:
 game_on = true
 board = {}
 board = { 1=> '' , 2=> '', 3=> '', 4 =>'', 5=>'', 6=>'', 7=>'', 8=>'', 9=>''}
+win = ''
+turn = 1
 
 Player.count_players
 
@@ -56,23 +59,33 @@ while game_on
   valid_move=false 
   while valid_move==false
     puts "#{last_player.name}, its your turn, which area do you chose?"
-    choice = gets.chomp
-    if validate_area?(choice.to_i, board) 
-       board[choice.to_i] = last_player.choice.upcase
-       print_grid(board) 
-       if check_win 
-        game_on=false
-        puts "congrats winner" 
-        break 
-       end
-       valid_move==true
-       last_player==Player1 ? last_player=Player2 : last_player=Player1
+    choice = gets.chomp.to_i
+    if validate_area?(choice, board) 
+      board[choice] = last_player.choice.upcase
+      print_grid(board)
+      valid_move==true
+      if last_player==Player1 
+        if winner(last_player, choice)
+          game_on = false
+          win = Player1.name
+          break
+        end
+          last_player=Player2
+      else
+        if winner(last_player, choice)
+          win = Player1.name
+          game_on = false
+          break
+        end
+        last_player=Player1
+      end
     else
       puts "Please type a valid choice!"
       print_grid(board) 
     end
   end
 end
+
 # 'If !draw, congrats player who won, else print: Draw! // then ask: Do you guys want to play again?'
 # Validate user choice.
 # if valid, move on, else inform player error so he can should chose it again
