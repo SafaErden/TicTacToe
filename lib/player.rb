@@ -1,14 +1,15 @@
-class Player
+# rubocop:disable Style/ClassVars
 
-  @@count_players=0
+class Player
+  @@count_players = 0
   attr_reader :name, :choice
   attr_accessor :moves, :score
-  def initialize (name,choice)
-    @name=name
-    @choice=choice
-    @@count_players+=1
-    @moves=[]
-    @score=0
+  def initialize(name, choice)
+    @name = name
+    @choice = choice
+    @@count_players += 1
+    @moves = []
+    @score = 0
   end
 
   def self.count_players
@@ -16,3 +17,4 @@ class Player
   end
 end
 
+# rubocop:enable Style/ClassVars
