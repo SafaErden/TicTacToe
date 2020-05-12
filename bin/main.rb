@@ -3,12 +3,9 @@
 require "./lib/player.rb"
 require "./lib/validate.rb"
 # Variables:
-player_1_name = ''
-player_2_name = ''
-player_1_choice = ''
-player_2_choice = ''
 game_on = true
-grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+board = {}
+board = { 1=> '' , 2=> '', 3=> '', 4 =>'', 5=>'', 6=>'', 7=>'', 8=>'', 9=>''}
 
 Player.count_players
 
@@ -32,40 +29,39 @@ while Player.count_players<=1
     end
   end
 
-    if Player.count_players==0
-      valid_choice=false 
-      while valid_choice==false
-        puts "OK #{name}, whats your choice? 'X' or 'O'"
-        choice = gets.chomp
-        if valid_choice?(choice) == false
-          puts "Please type a valid choice!"
-        else
-          valid_choice=true
-          choices[0]=choice 
-        end
+  if Player.count_players==0
+    valid_choice=false 
+    while valid_choice==false
+      puts "OK #{name}, whats your choice? 'X' or 'O'"
+      choice = gets.chomp
+      if valid_choice?(choice) == false
+        puts "Please type a valid choice!"
+      else
+        valid_choice=true
+        choices[0]=choice 
       end
-    elsif Player.count_players==1
-      choices[0].downcase=="x" ? choices[1]="o" : choices[1]="x"
-      puts "OK #{name}, since #{Player1.name} has chosen '#{Player1.choice.upcase}' your choice will be '#{choices[1].upcase}' automatically."
     end
-    Player.count_players==0 ? Player1=Player.new(name, choices[Player.count_players]) : Player2=Player.new(name, choices[Player.count_players])
+  elsif Player.count_players==1
+    choices[0].downcase=="x" ? choices[1]="o" : choices[1]="x"
+    puts "OK #{name}, since #{Player1.name} has chosen '#{Player1.choice.upcase}' your choice will be '#{choices[1].upcase}' automatically."
   end
-  puts "Ok, we\'re good to go!"
+  Player.count_players==0 ? Player1=Player.new(name, choices[Player.count_players]) : Player2=Player.new(name, choices[Player.count_players])
+end
+puts "Ok, we\'re good to go!"
 
+def print_grid
+  board.each do |k, v| 
+    print k
+    puts if v+1%3==0
+  end
+end
+print_grid
 
-
-# while game_on
-puts "#{player_1_name}, its your turn, which area do you chose?"
+puts "#{Player1.name}, its your turn, which area do you chose?"
 player_1_choice = gets.chomp
-# Validate user choice.
-# if valid, move on, else inform player error so he can should chose it again
-# display grid after each valid choice
-
-puts "#{player_2_name}, its your turn, please select an area"
+validate_area(gets.chomp, grid)
+puts "#{Player2.name}, its your turn, please select an area"
 player_1_choice = gets.chomp
-# Validate user choice.
-# if valid, move on, else inform player error so he can should chose it again
-# display grid after each valid choice
 
 # update grid
 # if winner or draw, set game_on = flase

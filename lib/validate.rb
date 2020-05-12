@@ -29,7 +29,8 @@ def start_game
   rand(1..2)
 end
 
-
-
-
-
+def validate_area(choice, grid)
+  if choice != (1..9) && grid[choice] == ''
+    grid[choice] = choice
+  end
+end
