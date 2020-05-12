@@ -51,21 +51,22 @@ while game_on
 
 
   print_grid(board)
-
+  rand(0..1) == 0 ? last_player=Player1 : Player2
+  
   valid_move=false 
   while valid_move==false
-    puts "#{Player1.name}, its your turn, which area do you chose?"
+    puts "#{last_player.name}, its your turn, which area do you chose?"
     choice = gets.chomp
     if validate_area?(choice.to_i, board) 
-      puts Player1.choice
-       board[choice.to_i] = Player1.choice.upcase
+       board[choice.to_i] = last_player.choice.upcase
        print_grid(board) 
-       valid_move==false
        if check_win 
         game_on=false
         puts "congrats winner" 
         break 
        end
+       valid_move==true
+       last_player==Player1 ? last_player=Player2 : last_player=Player1
     else
       puts "Please type a valid choice!"
       print_grid(board) 
