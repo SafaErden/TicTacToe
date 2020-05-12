@@ -6,27 +6,12 @@ def valid_name?(name)
   end  
 end
 
-choices=[]
 def valid_choice?(choice) 
   if choice.downcase=="x" || choice.downcase=="o"
     return true
   else
     return false
   end  
-end
-
-def create_player(name,choice)
-  player_one=Player.new(name, choice)
-  check_start
-end
-
-def check_start
-  Player.count_players<=1 ? get_name : start_game
-end
-
-def start_game
-  #choose which player to begin
-  rand(1..2)
 end
 
 def validate_area?(choice, board)
@@ -48,11 +33,19 @@ def print_grid(board)
     print " | "
     if k%3==0
       puts ""
-      #puts " ____________________"
     end
   end
 end
 
-def check_win 
-    return false
+
+def winner(player, choice)
+  winning_arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+
+  player.moves << choice
+  player.moves.combination(3).each do |x| 
+   if winning_arr.include?(x)
+      return true
+    end
+  end
+  false
 end
