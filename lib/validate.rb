@@ -29,8 +29,30 @@ def start_game
   rand(1..2)
 end
 
-def validate_area(choice, grid)
-  if choice != (1..9) && grid[choice] == ''
-    grid[choice] = choice
+def validate_area?(choice, board)
+  if choice != (1..9) && board[choice] == ''
+    return true
+  else
+    return false
   end
+end
+
+def print_grid(board)
+  board.each do |k, v| 
+    print " | "
+    if v==""
+     print k 
+    else 
+      print v
+    end
+    print " | "
+    if k%3==0
+      puts ""
+      #puts " ____________________"
+    end
+  end
+end
+
+def check_win 
+    return false
 end
