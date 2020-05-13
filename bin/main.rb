@@ -29,6 +29,19 @@ def new_game?
   $game_on = decision.downcase == 'y'
 end
 
+def print_grid(board)
+  board.each do |k, v|
+    print ' | '
+    if v == ''
+      print k
+    else
+      print v
+    end
+    print ' | '
+    puts '' if (k % 3).zero?
+  end
+end
+
 while $game_on
   choices = []
   while Player.count_players <= 1
