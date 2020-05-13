@@ -5,6 +5,7 @@
 # rubocop:disable Lint/Void: Operator
 
 require './lib/player.rb'
+require './lib/board.rb'
 require './lib/validate.rb'
 
 puts '------------------------------------'
@@ -81,9 +82,9 @@ while $game_on
   puts "Ok, we\'re good to go!"
   puts
 
-  board = { 1 => '', 2 => '', 3 => '', 4 => '', 5 => '', 6 => '', 7 => '', 8 => '', 9 => '' }
+  board = Board.new
   puts '------------------------------------'
-  print_grid(board)
+  print_grid(board.content)
   last_player = rand(0..1).zero? ? Player1 : Player2
 
   move_count = 0
@@ -98,10 +99,10 @@ while $game_on
     print "#{last_player.name}, its your turn, which area do you chose to put #{last_player.choice.upcase}: "
     choice = gets.chomp.to_i
     puts
-    if validate_area?(choice, board)
-      board[choice] = last_player.choice.upcase
+    if validate_area?(choice, board.content)
+      board.content[choice] = last_player.choice.upcase
       puts '------------------------------------'
-      print_grid(board)
+      print_grid(board.content)
       valid_move == true
       move_count += 1
       if winner(last_player, choice)
@@ -115,7 +116,7 @@ while $game_on
       puts '------------------------------------'
       puts 'Please type a valid choice!'
       puts '------------------------------------'
-      print_grid(board)
+      print_grid(board.content)
     end
   end
 end
