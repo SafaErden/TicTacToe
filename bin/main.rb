@@ -1,50 +1,127 @@
 #!/usr/bin/env ruby
-# rubocop:disable Lint/UselessAssignment
+# rubocop:disable Style/GlobalVars
+# rubocop:disable Metrics/BlockNesting
+# rubocop:disable Layout/LineLength
+# rubocop:disable Lint/Void: Operator
 
-# Variables:
-player_1_name = ''
-player_2_name = ''
-player_1_choice = ''
-player_2_choice = ''
-game_on = true
-grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+require './lib/player.rb'
+require './lib/board.rb'
+require './lib/validate.rb'
 
-# UserInterface
-puts '------------------'
+puts '------------------------------------'
+puts
 puts 'TicTacToe'
-puts '------------------'
-puts 'Player 01, whats your name?'
-player_1_name = gets.chomp
-puts 'Player 02, whats your name?'
-player_2_name = gets.chomp
-puts "Welcome #{player_1_name} and #{player_2_name}! Now #{player_1_name}, you should choose X or O"
-player_1_choice = gets.chomp
+puts
 
-# Validate user choice.
-# if valid, move on, else inform player error so he can should chose it again
+$game_on = true
 
-# display grid function goes here, it will print out the grid each time the players make a valid choice.
+def congratulate(name)
+  puts '------------------------------------'
+  puts "Congratulations #{name}, you won the game"
+  puts "Current scoreboard: #{Player1.name}: #{Player1.score} and #{Player2.name}: #{Player2.score}"
+end
 
-puts "Ok, we\'re good to go!"
-# while game_on
-puts "#{player_1_name}, its your turn, which area do you chose?"
-player_1_choice = gets.chomp
-# Validate user choice.
-# if valid, move on, else inform player error so he can should chose it again
-# display grid after each valid choice
+def new_game?
+  Player1.moves = []
+  Player2.moves = []
 
-puts "#{player_2_name}, its your turn, please select an area"
-player_1_choice = gets.chomp
-# Validate user choice.
-# if valid, move on, else inform player error so he can should chose it again
-# display grid after each valid choice
+  puts "If you want to play again type 'y' and press enter. If you want to leave just press enter."
+  decision = gets.chomp
+  $game_on = decision.downcase == 'y'
+end
 
-# update grid
-# if winner or draw, set game_on = flase
-# end of if
-# end of while loop
-# 'If !draw, congrats player who won, else print: Draw! // then ask: Do you guys want to play again?'
-# Validate user choice.
-# if valid, move on, else inform player error so he can should chose it again
-# display grid after each valid choice
-# rubocop:enable Lint/UselessAssignment
+def print_grid(board)
+  board.each do |k, v|
+    print ' | '
+    if v == ''
+      print k
+    else
+      print v
+    end
+    print ' | '
+    puts '' if (k % 3).zero?
+  end
+end
+
+while $game_on
+  choices = []
+  while Player.count_players <= 1
+
+    valid_name = false
+    while valid_name == false
+      puts '------------------------------------'
+      puts "Player #{Player.count_players + 1}, what is your name?"
+      name = gets.chomp
+      if valid_name?(name) == false
+        puts "Player #{Player.count_players + 1}, please type a valid name!"
+      else
+        valid_name = true
+      end
+    end
+
+    if Player.count_players.zero?
+      valid_choice = false
+      while valid_choice == false
+        puts '------------------------------------'
+        puts "OK #{name}, whats your choice? 'X' or 'O'"
+        choice = gets.chomp
+        if valid_choice?(choice) == false
+          puts 'Please type a valid choice!'
+        else
+          valid_choice = true
+          choices[0] = choice
+        end
+      end
+    elsif Player.count_players == 1
+      choices[1] = choices[0].downcase == 'x' ? 'o' : 'x'
+      puts '------------------------------------'
+      puts "OK #{name}, #{Player1.name} has chosen '#{Player1.choice.upcase}' your choice is '#{choices[1].upcase}'."
+    end
+    Player.count_players.zero? ? Player1 = Player.new(name, choices[Player.count_players]) : Player2 = Player.new(name, choices[Player.count_players])
+  end
+  puts "Ok, we\'re good to go!"
+  puts
+
+  board = Board.new
+  puts '------------------------------------'
+  print_grid(board.content)
+  last_player = rand(0..1).zero? ? Player1 : Player2
+
+  move_count = 0
+  valid_move = false
+  while valid_move == false
+    if (move_count + 1) > 9
+      puts "It's a draw, none of you won this game!"
+      new_game?
+      break
+    end
+    puts '------------------------------------'
+    print "#{last_player.name}, its your turn, which area do you chose to put #{last_player.choice.upcase}: "
+    choice = gets.chomp.to_i
+    puts
+    if validate_area?(choice, board.content)
+      board.content[choice] = last_player.choice.upcase
+      puts '------------------------------------'
+      print_grid(board.content)
+      valid_move == true
+      move_count += 1
+      if winner(last_player, choice)
+        last_player.score += 1
+        congratulate last_player.name
+        new_game?
+        break
+      end
+      last_player = last_player == Player1 ? Player2 : Player1
+    else
+      puts '------------------------------------'
+      puts 'Please type a valid choice!'
+      puts '------------------------------------'
+      print_grid(board.content)
+    end
+  end
+end
+
+# rubocop:enable Style/GlobalVars
+# rubocop:enable Metrics/BlockNesting
+# rubocop:enable Layout/LineLength
+# rubocop:enable Lint/Void: Operator
