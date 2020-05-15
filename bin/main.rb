@@ -81,7 +81,6 @@ while $game_on
   end
   puts "Ok, we\'re good to go!"
   puts
-
   board = Board.new
   puts '------------------------------------'
   print_grid(board.content)
