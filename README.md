@@ -27,7 +27,7 @@
 
 <h3 align="center"> In this project, the student builds a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.</h3>
 
-- If you want to plat it online visit [this repl link](https://repl.it/@SafaErden/Tic-Tac-Toe) to reach and play our tic tac toe game online.
+- If you want to play it online visit [this repl link](https://repl.it/@SafaErden/Tic-Tac-Toe) to reach and play our tic tac toe game online.
 
 <h2>How to start the game?</h2>
 
