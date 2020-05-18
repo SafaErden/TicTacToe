@@ -32,6 +32,4 @@ describe "Board" do
           expect(content.keys[5]).to eql(6)
       end
     end
-
-
  end
