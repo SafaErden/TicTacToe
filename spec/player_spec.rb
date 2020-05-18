@@ -20,22 +20,18 @@ describe "Player" do
       end
 
       it "should set @name to a new Player instance" do
-        expect(player.instance_variable_get(:@name)).not_to be_instance_of(Player)
         expect(player.name).to eql("name")
       end
 
       it "should set @choice to a new Player instance with the value of the first argument" do
-        expect(player.instance_variable_get(:@choice)).not_to be_instance_of(Player)
         expect(player.choice).to eql("X")
       end
 
       it "should set @moves to a new Player instance with initial value empty array" do
-        expect(player.instance_variable_get(:@moves)).not_to be_instance_of(Player)
         expect(player.moves).to eql([])
       end
 
       it "should set @score to a new Player instance with initial value 0" do
-        expect(player.instance_variable_get(:@score)).not_to be_instance_of(Player)
         expect(player.score).to eql(0)
       end
 

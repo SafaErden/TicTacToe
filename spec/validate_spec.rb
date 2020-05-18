@@ -1,5 +1,4 @@
 require "validate"
-require "player"
 
   describe "#valid_name?" do
     it "should return false if the given input is an empty string" do
