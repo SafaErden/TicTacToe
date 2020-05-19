@@ -79,6 +79,7 @@ If you always pay attention and look ahead, you'll never lose a game of Tic-Tac-
 ## 🔧 Built with<a name = "built_using"></a>
 
 - [Ruby](https://www.ruby-lang.org/) - Ruby
+- [Rspec](https://www.rspec.com) - A test driven framework
 
 ## Milestones:
 
@@ -86,6 +87,7 @@ If you always pay attention and look ahead, you'll never lose a game of Tic-Tac-
 ✔️ Milestone 02: Create the user interface.
 ✔️ Milestone 03: Create the game logic.
 ✔️ Milestone 04: Game instructions and final touches.
+✔️ Testing Your Ruby Code - Tic Tac Toe: RSPEC testing.
 
 ## ✒️ Autors <a name = "author"></a>
 
